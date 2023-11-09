@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+// App.js
+import { useState } from 'react';
+import WorkPage from './WorkPage';
 import './App.css';
 
 function App() {
+  const [userName, setUserName] = useState('');
+  const [isWorking, setIsWorking] = useState(false);
+
+  const startWork = () => {
+    setIsWorking(true);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isWorking ? (
+        <WorkPage userName={userName} />
+      ) : (
+        <div>
+          <input
+            type="text"
+            placeholder="Enter your name"
+            value={userName}
+            onChange={(e) => setUserName(e.target.value)}
+          />
+          <button onClick={startWork}>Start Work</button>
+        </div>
+      )}
     </div>
   );
 }
-
 export default App;
